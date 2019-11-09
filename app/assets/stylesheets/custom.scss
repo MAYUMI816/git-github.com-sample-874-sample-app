@@ -3,6 +3,17 @@
 
 /* 共通 */
 
+/* B1ヘッダー背景カラー*/
+#header {
+    background-color: #008080;
+    border-color: #008080; 
+} 
+/* B1ヘッダー背景カラー
+#header {
+  background-color: teal;
+}　*/
+
+
 body {
   padding-top: 60px;
 }
@@ -57,15 +68,20 @@ p {
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transform: uppercase;
+/*  text-transform: uppercase;　B３・大文字固定表示を解除　*/
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  font-style: italic;  /* B３・イタリック体（斜文字） */
 }
-
+/* B４・通常時ホワイト、ホバー時グレー */
 #logo:hover {
-  color: #fff;
+  color: #9d9d9d;
   text-decoration: none;
+}
+/* B5・classを作り、太字にする、文字色はホワイト、ホバー時はグレー */
+li .header-list {
+  font-weight: bold;
 }
 
 /* デバッグウインドウ */
