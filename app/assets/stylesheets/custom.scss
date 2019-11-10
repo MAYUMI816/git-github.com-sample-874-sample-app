@@ -3,17 +3,6 @@
 
 /* 共通 */
 
-/* B1ヘッダー背景カラー*/
-#header {
-    background-color: #008080;
-    border-color: #008080; 
-} 
-/* B1ヘッダー背景カラー
-#header {
-  background-color: teal;
-}　*/
-
-
 body {
   padding-top: 60px;
 }
@@ -33,6 +22,8 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
 
 /* タイポグラフィ */
 
@@ -79,9 +70,33 @@ p {
   color: #9d9d9d;
   text-decoration: none;
 }
+
 /* B5・classを作り、太字にする、文字色はホワイト、ホバー時はグレー */
 li .header-list {
   font-weight: bold;
+  color: #fff !important;
+  &:hover {
+  color: #9d9d9d !important;
+  }
+}
+
+/* B1ヘッダー背景カラー*/
+#header {
+    background-color: #008080;
+    border-color: #008080; 
+} 
+/* B1ヘッダー背景カラー
+#header {
+  background-color: teal;
+}　*/
+
+#dropdown-title {
+  background-color: teal;
+}
+
+li .dropdown-header {
+    background-color: rgba(200,200,200,0.5);
+    font-weight: bold;
 }
 
 /* デバッグウインドウ */
@@ -111,4 +126,12 @@ li .header-list {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+
+
+
+
+#dropdown-title{
+  background-color: #008080;
 }
