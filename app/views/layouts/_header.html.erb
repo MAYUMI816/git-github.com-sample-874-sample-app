@@ -1,31 +1,32 @@
 <% provide(:title,@current_user) %>
+<!-- ヘッダー部分-->
 <header class="navbar navbar-fixed-top navbar-inverse" id="header">
   <div class="container">
-    <%= link_to "Sample App", root_path, id: "logo" %>
+    <%= link_to "MAYU★Sample App", root_path, id: "logo" %> <!--左上-->
     <nav>
+<!-- トップ・利用者一覧・タスク制作・管理者（ドロップダウン表示）順-->      
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "トップ", root_path, class: "header-list" %></li>
         <% if logged_in? %>
-        
-          <li><%= link_to "利用者一覧", users_path , class: "header-list" %></li>
-         
+         <li><%= link_to "利用者一覧", users_path , class: "header-list" %></li>
          <li><%= link_to "タスク作成", new_user_task_path(current_user), class: "header-list" %></li>
-         
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle header-list" 
-            data-toggle="dropdown" id="dropdown-title" aria-extend="true">
-              管理者 <b class="caret"></b>
-            </a>
-            
+<!-- 管理者（ドロップダウン表示）部分-->      
+<!-- <a href="■■■■■■■■■■■" >●●●●●●●●●●●</a>　エイチレフ　■：リンク先URL　●：アンカーテキスト-->      
+　　　　　<li class="dropdown">
+          <a href="#" class="dropdown-toggle header-list" 
+          data-toggle="dropdown" id="dropdown-title" aria-extend="true"><%= current_user.name %><b class="caret"></b>
+          </a><!--B7 current_user.nameドロップダウンメニュー元に、ログイン中のユーザー名を表示-->
+          
+    
+</a>
+<!-- 管理者（ドロップダウン表示）中身部分-->             
             
             <ul class="dropdown-menu">
-              <li class="dropdown-header">ユーザー</li>
-              
+<!--題名--> <li class="dropdown-header">ユーザー</li>
               <li><%= link_to "プロフィール", current_user %></li>
-              <li><%= link_to "設定", '#' %></li>
-              
-               <li class="dropdown-header">タスク</li>
-               <li><%= link_to "タスク一覧", user_tasks_path(current_user) %></li>
+              <li><%= link_to "設定", edit_user_path(current_user) %></li> <!--/users/id/edit-->
+<!--題名-->　<li class="dropdown-header">タスク</li>
+              <li><%= link_to "タスク一覧", user_tasks_path(current_user) %></li>
               
               <li class="divider"></li>
               <li><%= link_to "ログアウト", logout_path, method: :delete %></li>

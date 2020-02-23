@@ -23,7 +23,13 @@ textarea {
   margin-bottom: 10px;
 }
 
+.label-form {
+  margin-top: 5px;
+}
 
+.btn-form {
+  margin-top: 10px;
+}
 
 /* タイポグラフィ */
 
@@ -53,6 +59,10 @@ p {
 }
 
 /* ヘッダー */
+
+#header {
+  background-color: teal;
+}
 
 #logo {
   float: left;

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_user #Controllerで使う同じコードはbefore_actionでまとめてしまえばいい。
-  before_action :set_task, only: %i(show edit update destroy)
+  before_action :set_task, only: %i(show edit destroy)
   
   
   
@@ -25,6 +25,8 @@ class TasksController < ApplicationController
       render :new
     end
   end
+  
+
 
 
 
@@ -37,12 +39,14 @@ class TasksController < ApplicationController
     @user = User.find(session[:user_id])
   end
   
-  def update #* update（投稿の更新保存）
-    @task = Task.find(params[:id])
-    flash[:success] = "タスクを更新しました。"
-    @task.save
-    redirect_to user_task_url @user
- 
+  def update # update（投稿の更新保存）
+    if @task.update_attributes(task_params)
+      flash[:success] = "タスクを更新しました。"
+      redirect_to user_task_url(@user, @task)
+    else
+      flash[:danger] = "タスクを失敗しました。"
+    end
+      redirect_to user_task_url(@user,@task)
   end
   
   def destroy #* destroy（投稿の削除）
@@ -54,7 +58,11 @@ class TasksController < ApplicationController
   private
 
       def task_params
-      params.require(:task).permit(:task_name, :task_detail, :user_id)
+       params.require(:task).permit(:name, :description)
+      end
+      
+      def edit_task_params
+        params.require(:task).permit(:name, :description)
       end
   
       def set_user
