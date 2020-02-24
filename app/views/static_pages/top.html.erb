@@ -3,14 +3,18 @@
 <div class="row">
   <div class="col-md-7">
     <div class="jumbotron" id="top-main">
-      <h1 id="top-main-title">MAYU★TaskApp</h1><!--わかりやすく変更-->
-      <p>TaskAppは簡易ToDo管理ツールです。</p>
-      <p>↓↓初めてのご利用↓↓</p></p>
+      <h1 id="top-main-title">MAYU★TaskApp</h1><!--わかりやすく名前変更-->
+      <center> <!--中心点［位置］-->
+        <p>TaskAppは簡易ToDo管理ツールです。</p>
+        <p>↓↓初めてのご利用↓↓</p></p>
+        <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %>　<!--<a class="btn btn-lg btn-success" href="/signup">アカウント作成</a> HTMLでは↓型が変わる-->
+      </center>
       
-       <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %>　<!--<a class="btn btn-lg btn-success" href="/signup">アカウント作成</a> HTMLでは↓型が変わる-->
       <div style="margin-top: 10px;">
+       <center>
         <%= link_to "ゲストログイン（管理権限）", signup_path, class: "btn btn-danger" %> <!-- signup_path 後で直す -->
         <%= link_to "ゲストログイン（一般権限）", login_path, class: "btn btn-warning" %> <!-- login_path 後で直す -->
+       </center>
        </div>
      </div>
 </div>
@@ -18,20 +22,30 @@
 
   <div class="col-md-4">
     <h1>ログイン</h1>
-    <form action="/login" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="+RPe/9UrX0CkKexnBBFYLQfHClakQ7OZ6RzcrZ1P+rvnVwVSSDnhCwdCl0txBtQ86RvoSTaOiovCLIb7hBUQLw==">
-        <label class="label-form" for="session_email">メールアドレス</label>
-        <input class="form-control" type="email" name="session[email]">
+<!--<form action="/login" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="+RPe/9UrX0CkKexnBBFYLQfHClakQ7OZ6RzcrZ1P+rvnVwVSSDnhCwdCl0txBtQ86RvoSTaOiovCLIb7hBUQLw==">
+    書換え-->
+    <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
   
-        <label class="label-form" for="session_password">パスワード</label>
-        <input class="form-control" type="password" name="session[password]">
+        <%= f.label :メールアドレス, class: "label-login" %>      <!-- <label class="label-form" for="session_email">メールアドレス</label> -->
+        <%= f.email_field :email, class: 'form-control' %>        <!-- <input class="form-control" type="email" name="session[email]"> -->
         
-        <label class="checkbox inline checkbox-login" for="remember-me">
-          <input name="session[remember_me]" type="hidden" value="0"><input id="remember-me" type="checkbox" value="1" name="session[remember_me]">
-          <span>ログイン情報を記憶する</span>
-</label>        
-        <input type="submit" name="commit" value="ログイン" class="btn btn-primary btn-block btn-form" data-disable-with="ログイン">
-</form>  </div>
+        <%= f.label :パスワード, class: "label-login" %>          <!-- <label class="label-form" for="session_password">パスワード</label>-->
+        <%= f.password_field :password, class: 'form-control' %>  <!-- <input class="form-control" type="password" name="session[password]"> -->
+      
+        <%= f.label :remember_me, class: "checkbox inline checkbox-login", for: "remember-me" do %>  <!-- <label class="checkbox inline checkbox-login" for="remember-me">-->
+        <%= f.check_box :remember_me, id: "remember-me" %>       <!-- <input name="session[remember_me]" type="hidden" value="0"><input id="remember-me" type="checkbox" value="1" name="session[remember_me]">-->
+         <span>ログイン情報を記憶する</span>                      <!-- -->
+       <% end %>
+        
+        <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %> <!--<input type="submit" name="commit" value="ログイン" class="btn btn-primary btn-block btn-form" data-disable-with="ログイン"> -->
+     <% end %>
+      <p>
+       ユーザー登録がまだの場合は<%= link_to "こちら", signup_path %>
+      </p>
+  </div>
+ </div>
 </div>
+
 
 
 
