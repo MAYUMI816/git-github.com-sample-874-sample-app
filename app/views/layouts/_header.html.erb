@@ -10,11 +10,11 @@
           <li><%= link_to "利用者一覧", users_path , class: "header-list" %></li>
          
          <li><%= link_to "タスク作成", new_user_task_path(current_user), class: "header-list" %></li>
-         
+<!--B7 ドロップダウンメニュー元に、ログイン中のユーザー名を表示する-->         
           <li class="dropdown">
             <a href="#" class="dropdown-toggle header-list" 
-            data-toggle="dropdown" id="dropdown-title" aria-extend="true">
-              管理者 <b class="caret"></b>
+            data-toggle="dropdown" id="dropdown-title" aria-extend="true"><%= current_user.name %>
+            <b class="caret"></b>
             </a>
             
             
