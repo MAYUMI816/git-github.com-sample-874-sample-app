@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-      <%= form_with(model: @task, url: user_task_path(@user, @task), local: true, method: :patch) do |f| %>
+      <%= form_with(model: @task, url: user_task_path(@user, @task), local: true) do |f| %>
       <%= render partial: 'shared/error_messages', locals: { obj: @task } %>
       
       <%= f.label :名称, class: "label-form" %><!-- <label class="label-form" for="task_name">名称</label> -->

@@ -3,13 +3,14 @@ class User < ApplicationRecord
   # ユーザーが削除された場合、関連するデータも同時に自動で削除されるよう設定
   has_many :tasks, dependent: :destroy
   before_save { self.email = email.downcase }
+  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name,  presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 100 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   # 渡された文字列のハッシュ値を返します。
   def User.digest(string)

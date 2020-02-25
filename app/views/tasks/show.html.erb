@@ -8,16 +8,21 @@
 	  <table class="table table-bordered" id="table-task">
 	    <tbody>
 	      <tr>
-	        <th class="active col-md-2">id</th>
-	        <td><%= @task.id %></td>
+	    <!--<th class="active col-md-2">id</th>-->
+	        <th class="active col-md-2"><%= Task.human_attribute_name :id %></th>
+	    <!--<td>< %= @task.id %></td>-->
+	        <td class="col-md-10"><%= @task.id %></td>
 	      </tr>
 	      <tr>
-	        <th class="active">名称</th>
+	    <!--<th class="active">名称</th>-->
+	        <th class="active"><%= Task.human_attribute_name :name %></th>
 	        <td><%= @task.name %></td>
 	      </tr>
 	      <tr>
-	        <th class="active">詳細</th>
-	        <td><%= @task.description %></td>
+	    <!--<th class="active">詳細</th>-->
+	        <th class="active"><%= Task.human_attribute_name :description %></th>
+	    <!--<td>< %= @task.description %></td>-->
+	    <!--c13 --><td><%= raw Rinku.auto_link(@task.description, :all, 'target="_blank"') %></td>
 	      </tr>
 	      <tr>
 	        <th class="active">作成日</th>
