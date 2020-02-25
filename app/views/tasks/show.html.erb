@@ -19,7 +19,7 @@
 	        <th class="active"><%= Task.human_attribute_name :description %></th>
 	        <!--<td>< %= @task.description %></td>-->
 	        <td><!-- c13リンク-->
-	        <%= raw Rinku.auto_link(@task.description) %>
+	        <%= raw Rinku.auto_link(@task.description,:all,'target="_blank"') %>
 		      </td>
 	      </tr>
 	      <tr>
