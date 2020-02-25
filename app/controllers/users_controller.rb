@@ -10,7 +10,7 @@ before_action :admin_user, only: :destroy #管理者のみ
   def index #利用者一覧ページ
     #@users = User.all #インスタンス変数名は全てのユーザーを代入した複数形(s)
     #@users = User.paginate(page: params[:page]) #8.4.2パラメータに基づき、データベースからひとかたまりのデータを取得
-   @users = User.paginate(page: params[:page]) #る@usersに代入しているUser.allを、ページネーションを判定できるオブジェクトに置き換える
+   @users = User.paginate(page: params[:page], per_page: 20) #る@usersに代入しているUser.allを、ページネーションを判定できるオブジェクトに置き換える
   end
   
   def new
@@ -43,7 +43,6 @@ before_action :admin_user, only: :destroy #管理者のみ
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
     else # 更新に成功した場合の処理を記述

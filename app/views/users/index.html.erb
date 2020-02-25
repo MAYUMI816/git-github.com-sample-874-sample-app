@@ -5,7 +5,6 @@
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %><!--D6 8. 4. 2 特殊なメソッドでページネーション-->
   <table class="table table-condensed table-hover" id="table-users">
-    
     <thead>
       <tr>
         <th><%= User.human_attribute_name :name %></th>
@@ -18,16 +17,17 @@
       <tr>
         <td>
         <%= link_to user.name, user %>
-<!-- まずは削除を開始するためのボタンを追加し、各ユーザーごとに表示されるようにします。-->  
-<!--  続いてシステム管理権限を持つユーザーのみがdestroyアクションにアクセスできるよう制限 --> 
-          <% if user.admin? %>
-            <span class="label label-primary label-user-division">管理者</span>
+
+          <% if user.admin? %> <!--権限-->
+            <span class="label label-primary label-user-division">管理者</span><!-- label-successボタンの色は赤-->
           <% else %>
-            <span class="label label-success label-user-division">一般</span>
+            <span class="label label-success label-user-division">一般</span><!-- label-successボタンの色は緑-->
           <% end %>
         </td>
         <td>
           <% unless user.admin? %>
+<!-- まずは削除を開始するためのボタンを追加し、各ユーザーごとに表示されるようにします。-->  
+<!--  続いてシステム管理権限を持つユーザーのみがdestroyアクションにアクセスできるよう制限 --> 
          <!-- < % if current_user.admin? && !current_user?(user) %>-->
             <%= link_to "削除", user, method: :delete,
                 data: { confirm: "#{user.name}を削除します。よろしいですか？" },
