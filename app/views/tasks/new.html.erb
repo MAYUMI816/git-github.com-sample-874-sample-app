@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-      <%= form_with(model: @task, url: user_tasks_path(@user), local: true) do |f| %> 
+      <%= form_with(model: @task, url: user_tasks_path(@user), local: true) do |f| %>
       <%= render partial: 'shared/error_messages', locals: { obj: @task } %>
       <!-- <input type="hidden" name="authenticity_token" value="y3C/4dE/t+ZY3D2F5UP8q5BGjLp7KJLT54hjbYnyWBFKy/+TkQ6WB0SmMSfBTseqwvrERqjcz+lrZQGuRzf4LQ=="> -->
       

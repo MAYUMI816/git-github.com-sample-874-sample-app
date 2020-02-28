@@ -21,11 +21,11 @@ Task.create!( task_name: "task1",
              task_description: "タスクの作成")
               
               
-@users = User.order(:created_at).take  # ①usersに最初の3人だけにタスクを作るように定義
+users = User.order(:created_at).take  # ①usersに最初の3人だけにタスクを作るように定義
 50.times do |n|                           # ②50個のタスクを作成
   task_name =Faker::Lorem.sentence(2)     # ③task_nameとtask_descriptionに内容を定義(Faker::Lorem)
   task_description = Faker::Lorem.sentence(5)
-  @users.each { |user| user.tasks.create!(task_name: task_name, task_description: task_description) }
+  users.each { |user| user.tasks.create!(task_name: task_name, task_description: task_description) }
 # ④usersの繰り返し処理でuserに代入してuserのtaskを作成し内容を(task_name: task_name,task_description: task_description)とする。
 end
 

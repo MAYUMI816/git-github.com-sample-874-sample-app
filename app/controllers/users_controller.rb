@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-before_action :logged_in_user, only: [:show, :edit, :update,:destroy] # #ログイン済み
-before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-before_action :correct_user, only: [:edit, :update] ##正しいユーザーのみ
-before_action :admin_user, only: :destroy #管理者のみ
 # before_actionとはアクション実行前に実行されるメソッド。
-# onlyオプションを指定すると、指定したアクションでのみ利用する。  
+# onlyオプションを指定すると、指定したアクションでのみ利用する。 
+
+before_action :set_user,only: [:show, :edit, :update, :destroy] #@user = User.find(params[:id])をまとめて記述しなくて済むよう@userをセットする
+before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy] #E1 8. 2. 1 ユーザーにログインを要求(  )のアクションが実行される直前にlogged_in_userメソッドが実行される
+before_action :correct_user, only: [:edit, :update]  #E4 8. 2. 2 正しいユーザーであることを要求
+before_action :admin_user, only: :destroy 
+# set_userフィルター、logged_in_userフィルターにdestroyアクションを指定。
+# 更に管理者のみ セキュリティ上万全にadmin_user,
+ 
 
 
   def index #利用者一覧ページ
@@ -19,7 +23,7 @@ before_action :admin_user, only: :destroy #管理者のみ
   end
   
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id]) #before_action :set_userの為削除
   end
 
 
@@ -37,11 +41,11 @@ before_action :admin_user, only: :destroy #管理者のみ
 
 
   def edit
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id]) #before_action :set_userの為削除
   end
 
   def update
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id]) #before_action :set_userの為削除
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
@@ -52,6 +56,7 @@ before_action :admin_user, only: :destroy #管理者のみ
 
 
   def destroy #「削除」ボタンが動作するためには、dastroyアクション
+    #@user = User.find(params[:id]) #before_action :set_userの為削除
     @user.destroy
     flash[:success] = "#{@user.name}のデータを削除しました。"
     redirect_to users_url
@@ -64,19 +69,22 @@ before_action :admin_user, only: :destroy #管理者のみ
     end
 
 # beforeフィルター
+
+
 # paramsハッシュからユーザーを取得します。
     def set_user
       @user = User.find(params[:id])
     end
 
-    # ログイン済みのユーザーか確認します。
+    # E1 8.2.1 ログイン済みのユーザーか確認
     def logged_in_user
-      unless logged_in?
-      store_location
+      unless logged_in? #unlessは条件式がfalseの場合のみ記述した処理が実行される構文
+      #store_location
         flash[:danger] = "ログインしてください。"
         redirect_to login_url
       end
     end
+# E4 8. 2. 2 正しいユーザーであることを要求    
 # アクセスしたユーザーが現在ログインしているユーザーか確認    
     def correct_user
       @user = User.find(params[:id])

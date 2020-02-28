@@ -1,13 +1,16 @@
 class TasksController < ApplicationController
-  before_action :set_user #Controllerで使う同じコードはbefore_actionでまとめてしまえばいい。
+  #before_action :set_user #Controllerで使う同じコードはbefore_actionでまとめてしまえばいい。
+  
+  before_action :set_user
+  #before_action :set_task, only: [:show, :index, :new, :edit, :update, :destroy]
   before_action :set_task, only: %i(show edit update destroy)
-
   
   
   def index #* index（一覧画面）
     #@user = User.find(params[:user_id])
-    #@task = @user.tasks.all
-    @task = @user.tasks
+    @tasks = @user.tasks
+    #@task = Task.all
+    
   end
   
   def show #* show（特定の投稿を表示する画面) 詳細ページ
@@ -16,15 +19,17 @@ class TasksController < ApplicationController
   
   def new #* new（投稿の新規作成画面）
     @task = Task.new
+    #@user = User.find(params[:user_id])
   end
   
 
 
   def create #* create（投稿の新規保存）
+    @user = User.find(params[:user_id])
     @task = @user.tasks.build(task_params)
     if @task.save
       flash[:success] = "タスクを新規作成しました。"
-      redirect_to user_tasks_url @user   #コントローラーのアクション内で自動的にページに切り替えるためのメソッド
+      redirect_to user_tasks_url #@user   #コントローラーのアクション内で自動的にページに切り替えるためのメソッド
     else
       render :new
     end
@@ -32,10 +37,11 @@ class TasksController < ApplicationController
   
   def edit #* edit（投稿の編集画面）
     @task = Task.find(params[:id])
-    @user = User.find(session[:user_id])
+    #@user = User.find(session[:user_id])
   end
   
   def update # update（投稿の更新保存）
+    #@task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = "タスクを更新しました。"
       redirect_to user_task_url(@user, @task)
